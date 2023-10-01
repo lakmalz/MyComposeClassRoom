@@ -54,8 +54,6 @@ fun OnBoardingPage(
             color = colorResource(id = R.color.text_medium)
         )
         Spacer(modifier = Modifier.height(MediumPadding0))
-
-
     }
 }
 

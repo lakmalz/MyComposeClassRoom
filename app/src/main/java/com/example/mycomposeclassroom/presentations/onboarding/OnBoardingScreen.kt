@@ -5,20 +5,26 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding2
+import com.example.mycomposeclassroom.presentations.common.NewsButton
+import com.example.mycomposeclassroom.presentations.common.NewsTextButton
 import com.example.mycomposeclassroom.presentations.onboarding.components.OnBoardingPage
+import com.example.mycomposeclassroom.presentations.onboarding.components.PageIndicator
+import kotlinx.coroutines.launch
 
 @kotlin.OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -26,7 +32,7 @@ fun OnBoardingScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0)
 
-        val buttonState = remember {
+        val buttonsState = remember {
             derivedStateOf {
                 when (pagerState.currentPage) {
                     0 -> listOf("", "Next")
@@ -37,8 +43,8 @@ fun OnBoardingScreen() {
             }
         }
 
-        HorizontalPager(state = pagerState, pageCount = pages.size) { index ->
-            OnBoardingPage(page = pages[index], modifier = Modifier.fillMaxHeight())
+        HorizontalPager(modifier = Modifier,state = pagerState, pageCount = pages.size) { index ->
+            OnBoardingPage(page = pages[index])
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -50,7 +56,43 @@ fun OnBoardingScreen() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-//            PageIndicator()
+            PageIndicator(
+                modifier = Modifier.width(52.dp),
+                pageSize = pages.size,
+                selectedPage = pagerState.currentPage
+            )
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                val scope = rememberCoroutineScope()
+                if (buttonsState.value[0].isNotEmpty()) {
+                    NewsTextButton(
+                        text = buttonsState.value[0],
+                        onClick = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(
+                                    page = pagerState.currentPage - 1
+                                )
+                            }
+                        }
+                    )
+                }
+
+                NewsButton(
+                    text = buttonsState.value[1],
+                    onClick = {
+                        scope.launch {
+                            if (pagerState.currentPage == 3) {
+                                // Navigate to the main screen
+                            } else {
+                                pagerState.animateScrollToPage(
+                                    page = pagerState.currentPage + 1
+                                )
+                            }
+                        }
+                    }
+                )
+            }
         }
+        Spacer(modifier = Modifier.weight(0.5f))
     }
 }
