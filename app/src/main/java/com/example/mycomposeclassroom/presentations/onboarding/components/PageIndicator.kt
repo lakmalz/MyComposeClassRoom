@@ -13,13 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.example.mycomposeclassroom.presentations.Dimens.IndicatorSize
-import com.example.mycomposeclassroom.presentations.Dimens.Padding2
+import com.example.mycomposeclassroom.presentations.Dimens.IndicatorSize14
+import com.example.mycomposeclassroom.presentations.Dimens.Padding4
 import com.example.mycomposeclassroom.ui.theme.BlueGray
 
 @Composable
 fun PageIndicator(
-    modifier: Modifier = Modifier,
     pageSize: Int,
     selectedPage: Int,
     selectedColor: Color = MaterialTheme.colorScheme.primary,
@@ -29,11 +28,11 @@ fun PageIndicator(
         repeat(pageSize) { page ->
             Box(
                 modifier = Modifier
-                    .size(IndicatorSize)
+                    .size(IndicatorSize14)
                     .clip(CircleShape)
                     .background(color = if (page == selectedPage) selectedColor else unselectedColor)
             )
-            Spacer(modifier = Modifier.width(Padding2))
+            Spacer(modifier = Modifier.width(Padding4))
         }
     }
 }

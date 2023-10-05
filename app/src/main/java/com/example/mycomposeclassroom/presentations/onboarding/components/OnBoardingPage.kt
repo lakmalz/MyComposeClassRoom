@@ -18,9 +18,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mycomposeclassroom.R
-import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding0
-import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding1
-import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding2
+import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding16
+import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding24
+import com.example.mycomposeclassroom.presentations.Dimens.MediumPadding30
 import com.example.mycomposeclassroom.presentations.onboarding.Page
 import com.example.mycomposeclassroom.presentations.onboarding.pages
 import com.example.mycomposeclassroom.ui.theme.MyComposeClassRoomTheme
@@ -39,21 +39,21 @@ fun OnBoardingPage(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(MediumPadding24))
         Text(
-            modifier = Modifier.padding(horizontal = MediumPadding2),
+            modifier = Modifier.padding(horizontal = MediumPadding30),
             text = page.title,
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
             color = colorResource(id = R.color.display_small)
         )
-        Spacer(modifier = Modifier.height(MediumPadding0))
+        Spacer(modifier = Modifier.height(MediumPadding16))
         Text(
-            modifier = Modifier.padding(horizontal = MediumPadding2),
+            modifier = Modifier.padding(horizontal = MediumPadding30),
             text = page.description,
             style = MaterialTheme.typography.bodyMedium,
             color = colorResource(id = R.color.text_medium)
         )
-        Spacer(modifier = Modifier.height(MediumPadding0))
+        Spacer(modifier = Modifier.height(MediumPadding16))
     }
 }
 
